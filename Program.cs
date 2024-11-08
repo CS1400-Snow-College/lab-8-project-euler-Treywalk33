@@ -40,7 +40,92 @@ namespace ProjectEuler
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
+                }
             }
+        }
+        static int MultiplesOf3And5(int limit)
+        {
+            int sum = 0;
+            for (int i = 0; i < limit; i++)
+            {
+                if (i % 3 == 0 || i % 5 == 0)
+                {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+
+        static int EvenFibonacciNumbers(int limit)
+        {
+            int a = 1, b = 2, sum = 0;
+            while (b <= limit)
+            {
+                if (b % 2 == 0)
+                {
+                    sum += b;
+                }
+                int temp = b;
+                b = a + b;
+                a = temp;
+            }
+            return sum;
+        }
+
+        static long LargestPrimeFactor(long number)
+        {
+            long largestFactor = 1;
+            while (number % 2 == 0)
+            {
+                largestFactor = 2;
+                number /= 2;
+            }
+
+            for (long i = 3; i * i <= number; i += 2)
+            {
+                while (number % i == 0)
+                {
+                    largestFactor = i;
+                    number /= i;
+                }
+            }
+
+            if (number > 1)
+                largestFactor = number;
+
+            return largestFactor;
+        }
+
+        static int LargestPalindromeProduct()
+        {
+            int largestPalindrome = 0;
+            for (int i = 100; i < 1000; i++)
+            {
+                for (int j = 100; j < 1000; j++)
+                {
+                    int product = i * j;
+                    if (product > largestPalindrome && IsPalindrome(product))
+                    {
+                        largestPalindrome = product;
+                    }
+                }
+            }
+            return largestPalindrome;
+        }
+
+        static bool IsPalindrome(int number)
+        {
+            string numberString = number.ToString();
+            int length = numberString.Length;
+            for (int i = 0; i < length / 2; i++)
+            {
+                if (numberString[i] != numberString[length- i - 1])
+                {
+                    return false;
+                }
+            }
+            return true;
+
         }
     }
 }
